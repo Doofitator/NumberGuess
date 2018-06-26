@@ -1,46 +1,53 @@
-$ Random number geussing game
+$ Random number guessing game
 
-int_highest = 100
-int_lowest = 0
-int_current = 0
+int_highest <-- 100
+int_lowest <-- 0
+int_current <-- 0
 
-PROCEDURE generateNumber(highest, lowest)
+PROCEDURE generateNumber()
 BEGIN
-	IF (heighest - lowest) = 1 THEN
+	IF (ing_highest – int_lowest) = 1 THEN
 		ALERT "You Cheated!"
+		restartGame()
 	ElSE
-		int_current = (midpoint of highest and lowest, rounded to whole number)
+		int_current <-- ((int_lowest + int_highest) /2) Rounded to nearest whole number
 		lbl_display text <-- int_currentNumber
 	END IF
+END
+
+PROCEDURE restartGame()
+BEGIN
+	btn_main text <-- "Start"
+	lbl_display text <-- 0
+	int_highest <-- 100
+	int_lowest <-- 0
+	int_current <-- 0
+	btn_higher ENABLED <-- False
+	btn_lower ENABLED<-- False
+
 END
 
 PROCEDURE btn_main CLICKED
 BEGIN
 	IF btn_main text = "Start" THEN
-		generateNumber(int_highest, int_lowest)
+		generateNumber()
 		btn_main text <-- "Correct"
 		btn_higher ENABLED <-- True
 		btn_lower ENABLED <-- True
 	ELSE
 		ALERT "Your number was " + int_current
-		btn_main text <-- "Start"
-		lbl_display text <-- 0
-		int_highest <-- 100
-		int_lowest <-- 0
-		int_current <-- 0
-		btn_higher ENABLED <-- False
-		btn_lower ENABLED <-- False
+		restartGame()
 	END IF
 END
 
 PROCEDURE btn_higher CLICKED
 BEGIN
 	int_lowest <-- int_current
-	generateNumber(int_highest, int_lowest)
+	generateNumber()
 END
 
 PROCEDURE btn_lower CLICKED
 BEGIN
 	int_heighest <-- int_current
-	generateNumber(int_highest, int_lowest)
+	generateNumber()
 END
