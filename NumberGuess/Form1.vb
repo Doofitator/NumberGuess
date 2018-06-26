@@ -9,10 +9,22 @@
         'generate subroutine
         If int_highestNumber - int_lowestNumber <= 1 Then 'If the numbers are directly apart (e.g. 50 and 51)
             MessageBox.Show("You cheated!", "Cheat!", MessageBoxButtons.OK, MessageBoxIcon.Error) 'Alert: You cheated!
+            restartGame()
         Else
             int_currentNumber = Math.Round((int_lowestNumber + int_highestNumber) / 2) 'Get the halfway point (rounded up)
             lbl_display.Text = int_currentNumber 'Display it to the user
         End If
+    End Sub
+
+    Private Sub restartGame()
+        'subroutine to reset the form
+        btn_main.Text = "Start"
+        lbl_display.Text = 0
+        int_highestNumber = 100
+        int_lowestNumber = 0
+        int_currentNumber = 0
+        btn_higher.Enabled = False
+        btn_lower.Enabled = False
     End Sub
 
     Private Sub btn_main_Click(sender As Object, e As EventArgs) Handles btn_main.Click
@@ -24,13 +36,7 @@
             btn_lower.Enabled = True  'lower buttons.
         Else
             MessageBox.Show("Your number was " + int_currentNumber.ToString, "Wahoo!", MessageBoxButtons.OK, MessageBoxIcon.Information) 'Alert "Your number was x"
-            btn_main.Text = "Start"     'Reset
-            lbl_display.Text = 0        'form
-            int_highestNumber = 100     'back
-            int_lowestNumber = 0        'to
-            int_currentNumber = 0       'how
-            btn_higher.Enabled = False  'it
-            btn_lower.Enabled = False   'began
+            restartGame()
         End If
     End Sub
 
